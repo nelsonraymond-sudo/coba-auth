@@ -11,14 +11,18 @@ class AuthController extends Controller
     {
         // Validasi email dan password
         $request->validate([
-            'email' => 'required|email|max:50',
-            'password' => 'required|max:50',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
+
+        $user = \App\Models\User::where('email', $request->email)->first();
         
-        if (Auth::attempt($request->only('email', 'password'), $request->remember)) {
-            $request->session()->regenerate();
-            return redirect('/dashboard');
-        }
+        if ($user && $user->password === $request->password) {
+        Auth::login($user, $request->remember);
+        $request->session()->regenerate();
+        return redirect('/dashboard');
+    }
+
         
         // Pesan error jika email atau password tidak sesuai
         return back()->with('failed', 'Email atau password salah.');

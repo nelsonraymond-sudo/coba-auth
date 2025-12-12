@@ -10,6 +10,5 @@ Route::get('/', function () {
 
 Route::get('/login', fn() => view('auth.login'))-> name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/dashboard', [DashboardController::class, 'index']) ->middleware('auth')
-    ->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/logout', [AuthController::class, 'logout']);

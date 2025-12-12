@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\ModelsUser;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         'email' => 'admin@gmail.com',
         'status' => 'active',
         'role' => 'admin',
-        'password' => bcrypt('admin')
+        'password' => 'admin'
     ]);
     
     User::create([
